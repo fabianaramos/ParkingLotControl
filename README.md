@@ -26,7 +26,7 @@ or
 ```
 $ docker exec -it <CONTAINER_ID> rails db:create
 $ docker exec -it <CONTAINER_ID> rails db:migrate
-$ docker exec -it <CONTAINER_ID> rails db:seeds
+$ docker exec -it <CONTAINER_ID> rails db:seed
 ```
 
 Your server will be running on http://localhost:3000
