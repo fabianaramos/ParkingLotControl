@@ -14,7 +14,7 @@ $ docker compose up
 $ docker ps
 ```
 
-## Set up the database
+## Setting up the database
 - Run the following command:
 
 ```
@@ -30,6 +30,12 @@ $ docker exec -it <CONTAINER_ID> rails db:seed
 ```
 
 Your server will be running on http://localhost:3000
+
+## Running tests
+
+```
+$ docker exec -it <CONTAINER_ID> rake test
+```
 
 # Sending requests
 
