@@ -1,24 +1,55 @@
-# README
+# Pre-requisites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- docker & docker compose
 
-Things you may want to cover:
+# Running app
+```
+$ docker compose up
+```
 
-* Ruby version
+# Setting up the application
 
-* System dependencies
+## Get the container
 
-* Configuration
+- Get the CONTAINER_ID
+```
+$ docker ps
+```
 
-* Database creation
+## Set up the database
+- Run the following command:
 
-* Database initialization
+```
+$ docker exec -it <CONTAINER_ID> rails db:prepare
+```
 
-* How to run the test suite
+or
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ docker exec -it <CONTAINER_ID> rails db:create
+$ docker exec -it <CONTAINER_ID> rails db:migrate
+$ docker exec -it <CONTAINER_ID> rails db:seeds
+```
 
-* Deployment instructions
+Your server will be running on http://localhost:3000
 
-* ...
+# Sending requests
+
+## Console
+
+You can send requests with following commands:
+
+```
+$ curl -X POST -d '{"plate": "aaA-4444"}' -H 'Content-type: application/json', http://localhost:3000/parking # to create parking
+
+$ curl -X PUT http://localhost:3000/parking/aAa-4444/pay # to pay the parking
+
+$ curl -X PUT http://localhost:3000/parking/aAa-4444/out # to leave the parking
+
+```
+
+## Postman
+
+You can also export the file `parking_lot_control.postman_collection.json` on Postman and see all requests if you want to.
+
+Happy conding! :)

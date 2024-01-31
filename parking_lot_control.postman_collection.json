@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "b584316c-c084-40f1-9966-d5d7e24e5441",
+		"name": "parking_lot_control",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17766948"
+	},
+	"item": [
+		{
+			"name": "Parking",
+			"item": [
+				{
+					"name": "Parking History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{parking_lot_url}}/parking/:plate",
+							"host": [
+								"{{parking_lot_url}}"
+							],
+							"path": [
+								"parking",
+								":plate"
+							],
+							"variable": [
+								{
+									"key": "plate",
+									"value": "ABC-1234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Parking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parking\": {\n        \"plate\": \"ACC-1234\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{parking_lot_url}}/parking",
+							"host": [
+								"{{parking_lot_url}}"
+							],
+							"path": [
+								"parking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay Parking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{parking_lot_url}}/parking/:plate/pay",
+							"host": [
+								"{{parking_lot_url}}"
+							],
+							"path": [
+								"parking",
+								":plate",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "plate",
+									"value": "ABC-1234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Out Parking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{parking_lot_url}}/parking/:plate/out",
+							"host": [
+								"{{parking_lot_url}}"
+							],
+							"path": [
+								"parking",
+								":plate",
+								"out"
+							],
+							"variable": [
+								{
+									"key": "plate",
+									"value": "ABC-1234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Parking",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{parking_lot_url}}/parking/:plate",
+							"host": [
+								"{{parking_lot_url}}"
+							],
+							"path": [
+								"parking",
+								":plate"
+							],
+							"variable": [
+								{
+									"key": "plate",
+									"value": "ABC-1234"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "parking_lot_url",
+			"value": "localhost:3000"
+		}
+	]
+}

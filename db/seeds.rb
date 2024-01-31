@@ -7,3 +7,6 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Parking.create(plate: 'BCV-6757', paid: true, left: true, left_at: Time.now + 30.minutes)
+Parking.create!(plate: 'BCV-6757')
