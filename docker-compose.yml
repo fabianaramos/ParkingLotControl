@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  web:
+    build: ./
+    volumes:
+      - .:/docker/app
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - default
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: always
+    networks:
+      - default
+
+volumes:
+  postgres:

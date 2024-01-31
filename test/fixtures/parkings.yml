@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plate: MyString
+  time: 1
+  paid: false
+  left: false
+
+two:
+  plate: MyString
+  time: 1
+  paid: false
+  left: false
