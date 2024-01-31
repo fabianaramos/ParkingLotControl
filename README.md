@@ -9,8 +9,6 @@ $ docker compose up
 
 # Setting up the application
 
-## Get the container
-
 - Get the CONTAINER_ID
 ```
 $ docker ps
