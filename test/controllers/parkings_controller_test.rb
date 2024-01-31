@@ -5,28 +5,29 @@ class ParkingsControllerTest < ActionDispatch::IntegrationTest
     @parking = parkings(:one)
   end
 
-  test 'should get index' do
-    get parkings_url, as: :json
+  test 'should get the history' do
+    get parking_url(@parking.plate), as: :json
     assert_response :success
   end
 
   test 'should create parking' do
     assert_difference('Parking.count') do
-      post parkings_url, params: { parking: { left: @parking.left, paid: @parking.paid, plate: @parking.plate, time: @parking.time } },
+      post parkings_url, params: { parking: { plate: @parking.plate } },
                          as: :json
     end
 
     assert_response :created
   end
 
-  test 'should show parking' do
-    get parking_url(@parking), as: :json
+  test 'should update paid on parking' do
+    put parking_pay_url(@parking), as: :json
     assert_response :success
   end
 
-  test 'should update parking' do
-    patch parking_url(@parking),
-          params: { parking: { left: @parking.left, paid: @parking.paid, plate: @parking.plate, time: @parking.time } }, as: :json
+  test 'should update left on parking' do
+    @parking = parkings(:two)
+
+    put parking_out_url(@parking), as: :json
     assert_response :success
   end
 
@@ -35,6 +36,6 @@ class ParkingsControllerTest < ActionDispatch::IntegrationTest
       delete parking_url(@parking), as: :json
     end
 
-    assert_response :no_content
+    assert_response :success
   end
 end

@@ -12,6 +12,6 @@ class Parking < ApplicationRecord
   def ensure_can_leave_park
     return unless paid == false && left == true
 
-    errors.add(:paid, t('activerecord.errors.messages.must_be_true_before_out'))
+    errors.add(:paid, I18n.t('activerecord.errors.messages.must_be_true_before_out'))
   end
 end
