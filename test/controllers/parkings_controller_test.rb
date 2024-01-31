@@ -12,7 +12,7 @@ class ParkingsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create parking' do
     assert_difference('Parking.count') do
-      post parkings_url, params: { parking: { plate: @parking.plate } },
+      post parkings_url, params: { parking: { plate: 'HIJ-6789' } },
                          as: :json
     end
 
@@ -20,20 +20,20 @@ class ParkingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update paid on parking' do
-    put parking_pay_url(@parking), as: :json
+    put parking_pay_url(@parking.plate), as: :json
     assert_response :success
   end
 
   test 'should update left on parking' do
     @parking = parkings(:two)
 
-    put parking_out_url(@parking), as: :json
+    put parking_out_url(@parking.plate), as: :json
     assert_response :success
   end
 
   test 'should destroy parking' do
     assert_difference('Parking.count', -1) do
-      delete parking_url(@parking), as: :json
+      delete parking_url(@parking.plate), as: :json
     end
 
     assert_response :success

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  resources :parkings, only: %i[create destroy] do
+  # resources :parks, only: %i[create destroy] do
+  # put '/pay'
+  # put '/out'
+  # end
+
+  resources :parkings, path: 'parking', param: :plate, only: %i[create destroy] do
     put '/pay', to: 'parkings#pay'
     put '/out', to: 'parkings#out'
   end
 
-  get 'parkings/:plate', to: 'parkings#history'
-
+  get 'parking/:plate', to: 'parkings#history'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

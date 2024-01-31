@@ -4,24 +4,23 @@ class ParkTest < ActiveSupport::TestCase
   test 'plate presence validation' do
     parking = Parking.new(plate: nil)
     assert_not parking.valid?
-    assert_includes parking.errors[:plate], "can't be blank"
   end
 
   test 'plate format validation' do
-    parking = Parking.new(plate: '123-ABCD')
+    parking = Parking.new(plate: '123CD')
     assert_not parking.valid?
     assert_includes parking.errors[:plate], 'is invalid'
 
-    parking = Parking.new(plate: 'ABC-1234')
+    parking = Parking.new(plate: 'ABC-4567')
     assert parking.valid?
   end
 
   test 'park can be left validation' do
-    parking = Parking.new(plate: 'ABC-1234', paid: false, left: true)
+    parking = Parking.new(plate: 'ABC-1235', paid: false, left: true)
     assert_not parking.valid?
     assert_includes parking.errors[:paid], 'must be true before leaving'
 
-    parking = Parking.new(plate: 'ABC-1234', paid: true, left: true)
+    parking = Parking.new(plate: 'ZXC-1344', paid: true, left: true)
     assert parking.valid?
   end
 

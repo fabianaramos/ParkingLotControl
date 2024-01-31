@@ -1,8 +1,6 @@
 class ParkingsController < ApplicationController
-  before_action :set_parking, only: %i[destroy pay out]
-
   def history
-    @parkings = Parking.where(plate: params[:plate])
+    @parkings = Parking.where(plate: params[:plate].upcase)
 
     render json: @parkings, each_serializer: ::ParkingSerializer, status: :ok
   end
@@ -10,22 +8,25 @@ class ParkingsController < ApplicationController
   def create
     @parking = Parking.create!(parking_params)
 
-    render json: @parking, serializer: ::ParkingSerializer, status: :created, location: @park
+    render json: @parking, serializer: ::ParkingSerializer, status: :created
   end
 
   def destroy
-    @parking.destroy!
+    @parkings = Parking.where(plate: params[:plate].upcase)
+    @parkings.destroy_all
 
-    render json: @parking, serializer: ::ParkingSerializer, status: :ok
+    render json: @parkings, each_serializer: ::ParkingSerializer, status: :ok
   end
 
   def pay
-    @parking.update!(paid: true, paid_at: Time.now) unless @parking.paid?
+    @parking = Parking.find_by!(paid: false, plate: params[:parking_plate].upcase)
+    @parking.update!(paid: true, paid_at: Time.now)
 
     render json: @parking, serializer: ::ParkingSerializer, status: :ok
   end
 
   def out
+    @parking = Parking.find_by!(left: false, plate: params[:parking_plate].upcase)
     @parking.update!(left: true) unless @parking.left?
 
     render json: @parking, serializer: ::ParkingSerializer, status: :ok
@@ -33,11 +34,7 @@ class ParkingsController < ApplicationController
 
   private
 
-  def set_parking
-    @parking = Parking.find(params[:id] || params[:parking_id])
-  end
-
   def parking_params
-    params.require(:parking).permit(:plate, :time, :paid, :left)
+    params.require(:parking).permit(:time, :paid, :left).merge(plate: params[:parking][:plate].upcase)
   end
 end
