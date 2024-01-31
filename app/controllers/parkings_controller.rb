@@ -1,5 +1,5 @@
 class ParkingsController < ApplicationController
-  def history
+  def index
     @parkings = Parking.where(plate: params[:plate].upcase)
 
     render json: @parkings, each_serializer: ::ParkingSerializer, status: :ok
